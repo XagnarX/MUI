@@ -851,10 +851,10 @@
   {
     "key": "3",
     "month": "2025年02月",
-    "scriptConsumption": 282.3328,
-    "chainGovernance": 3.0212,
-    "rollupConsumption": 9.5983,
-    "l2txfeevalutProfit": 3.068999999999999,
+    "scriptConsumption": 293.09929999999997,
+    "chainGovernance": 3.0442,
+    "rollupConsumption": 9.9462,
+    "l2txfeevalutProfit": 2.972999999999999,
     "details": [
       {
         "key": "64",
@@ -1197,7 +1197,7 @@
       {
         "key": "90",
         "date": "2025/2/27",
-        "scriptAccount": 42.3336,
+        "scriptAccount": 15.3336,
         "scriptConsumption": 9.3891,
         "gasOracle": 1.8927,
         "chainGovernance": 0.0142,
@@ -1206,16 +1206,91 @@
         "l2txfeevalut": 63.8218,
         "l2txfeevalutFlow": 9.7464,
         "l2txfeevalutProfit": 0.1608
+      },
+      {
+        "key": "91",
+        "date": "2025/2/28",
+        "scriptAccount": 30.5671,
+        "scriptConsumption": 10.7665,
+        "gasOracle": 1.8697,
+        "chainGovernance": 0.023,
+        "sequencers": 32.9995,
+        "rollupConsumption": 0.3479,
+        "l2txfeevalut": 14.8632,
+        "l2txfeevalutFlow": 11.0415,
+        "l2txfeevalutProfit": -0.096
+      }
+    ]
+  },
+  {
+    "key": "4",
+    "month": "2025年03月",
+    "scriptConsumption": 36.836,
+    "chainGovernance": 0.0754,
+    "rollupConsumption": 1.1457,
+    "l2txfeevalutProfit": 0.003100000000000004,
+    "details": [
+      {
+        "key": "92",
+        "date": "2025/3/1",
+        "scriptAccount": 20.5004,
+        "scriptConsumption": 10.0667,
+        "gasOracle": 1.8584,
+        "chainGovernance": 0.0113,
+        "sequencers": 32.8692,
+        "rollupConsumption": 0.1303,
+        "l2txfeevalut": 25.2067,
+        "l2txfeevalutFlow": 10.3434,
+        "l2txfeevalutProfit": 0.1351
+      },
+      {
+        "key": "93",
+        "date": "2025/3/2",
+        "scriptAccount": 11.1463,
+        "scriptConsumption": 9.3541,
+        "gasOracle": 1.8382,
+        "chainGovernance": 0.0202,
+        "sequencers": 32.3962,
+        "rollupConsumption": 0.473,
+        "l2txfeevalut": 34.8889,
+        "l2txfeevalutFlow": 9.6823,
+        "l2txfeevalutProfit": -0.1651
+      },
+      {
+        "key": "94",
+        "date": "2025/3/3",
+        "scriptAccount": 12.006,
+        "scriptConsumption": 9.1403,
+        "gasOracle": 1.8158,
+        "chainGovernance": 0.0224,
+        "sequencers": 32.1179,
+        "rollupConsumption": 0.2783,
+        "l2txfeevalut": 44.3719,
+        "l2txfeevalutFlow": 9.4829,
+        "l2txfeevalutProfit": 0.042
+      },
+      {
+        "key": "95",
+        "date": "2025/3/4",
+        "scriptAccount": 13.7311,
+        "scriptConsumption": 8.2749,
+        "gasOracle": 1.7943,
+        "chainGovernance": 0.0215,
+        "sequencers": 31.8538,
+        "rollupConsumption": 0.2641,
+        "l2txfeevalut": 52.9234,
+        "l2txfeevalutFlow": 8.5516,
+        "l2txfeevalutProfit": -0.0089
       }
     ]
   },
   {
     "key": "total",
     "month": "总计",
-    "scriptConsumption": 610.1172,
-    "chainGovernance": 9.5701,
-    "rollupConsumption": 93.2094,
-    "l2txfeevalutProfit": 83.1738,
+    "scriptConsumption": 657.7197,
+    "chainGovernance": 9.6685,
+    "rollupConsumption": 94.703,
+    "l2txfeevalutProfit": 83.0809,
     "isTotal": true
   }
 ]
