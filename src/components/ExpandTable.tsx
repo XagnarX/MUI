@@ -25,6 +25,8 @@ interface DataType {
   scriptConsumption: number;
   chainGovernance: number;
   rollupConsumption: number;
+  l2txfeevalut: number;
+  l2txfeevalutFlow: number;
   l2txfeevalutProfit: number;
   details?: ExpandedDataType[];
   isTotal?: boolean;
@@ -43,20 +45,55 @@ interface AssetDataType {
 const expandColumns: TableColumnsType<ExpandedDataType> = [
   { title: '日期', dataIndex: 'date', key: 'date', fixed: 'left' },
   { title: '脚本账户', dataIndex: 'scriptAccount', key: 'scriptAccount' },
-  { title: '脚本日消耗', dataIndex: 'scriptConsumption', key: 'scriptConsumption' },
-  { title: 'Gas Oracle', dataIndex: 'gasOracle', key: 'gasOracle' },
-  { title: '链治理日消耗', dataIndex: 'chainGovernance', key: 'chainGovernance' },
-  { title: 'Sequencers', dataIndex: 'sequencers', key: 'sequencers' },
-  { title: 'Rollup日消耗', dataIndex: 'rollupConsumption', key: 'rollupConsumption' },
-  { title: 'L2交易费', dataIndex: 'l2txfeevalut', key: 'l2txfeevalut' },
-  { title: 'L2交易费流水', dataIndex: 'l2txfeevalutFlow', key: 'l2txfeevalutFlow' },
+  { 
+    title: '脚本日消耗', 
+    dataIndex: 'scriptConsumption', 
+    key: 'scriptConsumption',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'Gas Oracle', 
+    dataIndex: 'gasOracle', 
+    key: 'gasOracle',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: '链治理日消耗', 
+    dataIndex: 'chainGovernance', 
+    key: 'chainGovernance',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'Sequencers', 
+    dataIndex: 'sequencers', 
+    key: 'sequencers',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'Rollup日消耗', 
+    dataIndex: 'rollupConsumption', 
+    key: 'rollupConsumption',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'L2交易费', 
+    dataIndex: 'l2txfeevalut', 
+    key: 'l2txfeevalut',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'L2交易费流水', 
+    dataIndex: 'l2txfeevalutFlow', 
+    key: 'l2txfeevalutFlow',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
   { 
     title: 'L2交易费日利润', 
     dataIndex: 'l2txfeevalutProfit', 
     key: 'l2txfeevalutProfit',
     render: (value: number) => (
       <span style={{ color: value >= 0 ? 'green' : 'red' }}>
-        {value ? value.toFixed(4) : '-'}
+        {value !== undefined ? value.toFixed(4) : '-'}
       </span>
     )
   }
@@ -64,16 +101,37 @@ const expandColumns: TableColumnsType<ExpandedDataType> = [
 
 const columns: TableColumnsType<DataType> = [
   { title: '月份', dataIndex: 'month', key: 'month', fixed: 'left' },
-  { title: '脚本日消耗', dataIndex: 'scriptConsumption', key: 'scriptConsumption' },
-  { title: '链治理日消耗', dataIndex: 'chainGovernance', key: 'chainGovernance' },
-  { title: 'Rollup日消耗', dataIndex: 'rollupConsumption', key: 'rollupConsumption' },
+  { 
+    title: '脚本日消耗', 
+    dataIndex: 'scriptConsumption', 
+    key: 'scriptConsumption',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: '链治理日消耗', 
+    dataIndex: 'chainGovernance', 
+    key: 'chainGovernance',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'Rollup日消耗', 
+    dataIndex: 'rollupConsumption', 
+    key: 'rollupConsumption',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
+  { 
+    title: 'L2交易费流水', 
+    dataIndex: 'l2txfeevalutFlow', 
+    key: 'l2txfeevalutFlow',
+    render: (value: number) => value !== undefined ? value.toFixed(4) : '-'
+  },
   { 
     title: 'L2交易费日利润', 
     dataIndex: 'l2txfeevalutProfit', 
     key: 'l2txfeevalutProfit',
     render: (value: number) => (
       <span style={{ color: value >= 0 ? 'green' : 'red' }}>
-        {value.toFixed(4)}
+        {value !== undefined ? value.toFixed(4) : '-'}
       </span>
     )
   }
@@ -116,6 +174,64 @@ const ExpandTable: React.FC = () => {
   const totalRow = tableData.find(item => item.isTotal) as DataType;  // 添加类型断言
   const monthlyData = tableData.filter(item => !item.isHeader && !item.isTotal) as DataType[];  // 添加类型断言
 
+  // 计算每月汇总时处理所有数值字段的精度
+  const processedMonthlyData = monthlyData.map(month => {
+    // 如果已经计算过，返回原始数据
+    if (month.l2txfeevalutFlow !== undefined) {
+      return {
+        ...month,
+        scriptConsumption: Number(month.scriptConsumption.toFixed(4)),
+        chainGovernance: Number(month.chainGovernance.toFixed(4)),
+        rollupConsumption: Number(month.rollupConsumption.toFixed(4)),
+        l2txfeevalutFlow: Number(month.l2txfeevalutFlow.toFixed(4)),
+        l2txfeevalutProfit: Number(month.l2txfeevalutProfit.toFixed(4))
+      };
+    }
+    
+    // 否则，从详情数据中计算
+    if (month.details && month.details.length > 0) {
+      const sumL2TxFeeValutFlow = month.details.reduce((sum, day) => {
+        return sum + (day.l2txfeevalutFlow || 0);
+      }, 0);
+      
+      return {
+        ...month,
+        scriptConsumption: Number(month.scriptConsumption.toFixed(4)),
+        chainGovernance: Number(month.chainGovernance.toFixed(4)),
+        rollupConsumption: Number(month.rollupConsumption.toFixed(4)),
+        l2txfeevalutFlow: Number(sumL2TxFeeValutFlow.toFixed(4)),
+        l2txfeevalutProfit: Number(month.l2txfeevalutProfit.toFixed(4))
+      };
+    }
+    
+    return {
+      ...month,
+      scriptConsumption: Number(month.scriptConsumption.toFixed(4)),
+      chainGovernance: Number(month.chainGovernance.toFixed(4)),
+      rollupConsumption: Number(month.rollupConsumption.toFixed(4)),
+      l2txfeevalutProfit: Number(month.l2txfeevalutProfit.toFixed(4))
+    };
+  });
+
+  // 处理总计行的精度
+  let processedTotalRow = totalRow;
+  if (totalRow) {
+    const totalL2TxFeeValutFlow = processedMonthlyData.reduce((sum, month) => {
+      return sum + (month.l2txfeevalutFlow || 0);
+    }, 0);
+    
+    processedTotalRow = {
+      ...totalRow,
+      scriptConsumption: Number(totalRow.scriptConsumption.toFixed(4)),
+      chainGovernance: Number(totalRow.chainGovernance.toFixed(4)),
+      rollupConsumption: Number(totalRow.rollupConsumption.toFixed(4)),
+      l2txfeevalutFlow: totalRow.l2txfeevalutFlow !== undefined ? 
+        Number(totalRow.l2txfeevalutFlow.toFixed(4)) : 
+        Number(totalL2TxFeeValutFlow.toFixed(4)),
+      l2txfeevalutProfit: Number(totalRow.l2txfeevalutProfit.toFixed(4))
+    };
+  }
+
   return (
     <div style={{ 
       display: 'flex', 
@@ -139,7 +255,7 @@ const ExpandTable: React.FC = () => {
             expandedRowRender,
             rowExpandable: (record) => !record.isTotal
           }}
-          dataSource={[...monthlyData, ...(totalRow ? [totalRow] : [])]}
+          dataSource={[...processedMonthlyData, ...(processedTotalRow ? [processedTotalRow] : [])]}
           scroll={{ x: 1200 }}
           pagination={false}
           style={{ flex: 1 }}
