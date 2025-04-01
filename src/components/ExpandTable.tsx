@@ -247,7 +247,7 @@ const ExpandTable: React.FC = () => {
           fontSize: '18px',
           fontWeight: 'bold'
         }}>
-          Morph 营收细节
+          公链 营收细节
         </h2>
         <Table<DataType>
           columns={columns}

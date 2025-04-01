@@ -121,7 +121,7 @@ def main():
     project_root = script_dir.parent
     
     # 设置输入输出路径
-    csv_path = project_root / 'src' / 'assets' / 'aa.csv'
+    csv_path = project_root / 'src' / 'assets' / 'excel_del_cols.csv'
     json_path = project_root / 'src' / 'assets' / 'tableData.json'
     adjustments_path = project_root / 'src' / 'assets' / 'profit_adjustments.json'
     
